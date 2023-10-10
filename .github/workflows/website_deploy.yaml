@@ -1,0 +1,40 @@
+name: website_deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+    AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  
+          fetch-depth: 0   
+      
+      - name: Setup Go environment
+        uses: actions/setup-go@v3.0.0
+        
+      - name: Setup Hugo
+        run: |
+          sudo snap install hugo --channel=extended          
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: eu-central-1           
+      
+      - name: hugo build
+        run : |
+          make build          
+      
+      - name: push build artifact to S3
+        run: |
+          make deploy    
