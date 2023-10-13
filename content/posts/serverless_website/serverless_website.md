@@ -148,7 +148,7 @@ resource "aws_s3_bucket_website_configuration" "apex" {
 }
 ```
 
-The `host_name` variable under `redirect_all_requests_to` is equal to the name of the previously created bucket - which in this case is (mandatory to be) www.adrian-docs.com - thanks to both of these buckets both the apex and the subdomain now work!
+The `host_name` variable under `redirect_all_requests_to` is equal to the name of the previously created bucket - which in this case is (mandatory to be) www.adrian-docs.com - thanks to both of these buckets both the apex and the subdomain work!
 
 ### CloudFlare
 
