@@ -129,7 +129,7 @@ resource "aws_s3_bucket_website_configuration" "subdomain" {
 }
 ```
 
-The most notable aspect of this `S3` configuration is the policy. It only permits access to `CloudFlare` IP ranges which are specified in another fire as a data source. Besides that aspect - it is a simple configuration to host a static website. The `s3_apex.tf` is near identical - which the sole difference being the following:
+The most notable aspect of this `S3` configuration is the policy. It only permits access to `CloudFlare` IP ranges which are specified in another fire as a data source. Besides that aspect - it is a simple configuration to host a static website. The `s3_apex.tf` is near identical - with the sole difference being the following:
 
 ```HCL
 resource "aws_s3_bucket_policy" "apex" {
