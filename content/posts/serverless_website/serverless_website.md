@@ -4,7 +4,7 @@ date = 2023-10-09T15:06:42+03:00
 draft = false
 +++
 
-# Introduction
+## Introduction
 
 Initially I wanted an AWS project - whatever that may be, as I am (at the time of writing) studying for SAA-C03. Someone pitched me the idea of hosting a personal website which can also serve as a portofolio for such projects, so here it is.
 
@@ -14,13 +14,16 @@ Now that that's been established, the question is what to write the website with
 
 For deployment of infrastructure `Terraform` will be used. This will be used for the creation of all `AWS` resources and the `CloudFlare` records.
 
-<picture here>
+![Website Structure](../website_structure.png "Conceptually the flow of requests")
 
-# Installing Hugo
+*Conceptually*, on the left side the users make a request to `CloudFlare` and that is forwarded to the `S3` bucket. This is true for the subdomain bucket. *Practically*, the apex bucket redirects all requests to www.adrian-docs.com and then the same workflow happens - the apex bucket is not showcased in the diagram. The apex bucket is not shown in the diagram. 
+On the right side is the GitHub workflow - which simply utilizes `GitHub` actions to deploy the website on the bucket upon a push.
+
+## Installing Hugo
 
 `Hugo` has a dependency on `Golang` - which has to be installed first. Their quickstart guide is sufficient to get a website running. Several configurations can be added in the `hugo.yaml` file and new pages can be written in `markdown` - each page can be created with a command such as `hugo new posts/example-post.md`. By running `hugo server -D` you can locally test each and every change on `localhost:1313/`.
 
-# Building the Infrastructure
+## Building the Infrastructure
 
 To this end `Terraform` is used. The website infrastructure will be in a seperate repository than the website itself. The repository will be structured like so:
 ```bash
@@ -40,7 +43,7 @@ Here is what each folder will contain:
 * s3_apex.tf -> deployment of the `S3` _apex_ bucket alongside its policies and configuration
 * variables.tf -> declaration of the terraform variables and their defaults
 
-## Providers configuration and backend
+### Providers configuration and backend
 
 The following is the `main.tf` fille: 
 
@@ -69,7 +72,7 @@ There are two things going on here.
 1. The first are the providers. There are two providers, CloudFlare and AWS, and the latest version has been hardcoded for each.
 2. The `S3` backend. This is a bucket manually created and setup to function as the place where `Terraform` places the statefile in. 
 
-## The S3 Buckets
+### The S3 Buckets
 
 As per the [CloudFlare documentation](https://developers.cloudflare.com/support/third-party-software/others/configuring-an-amazon-web-services-static-site-to-use-cloudflare/) 2 buckets have to be created. It is necessary for the buckets to have the same name as the subdomain (www.adrian-docs.com) and apex (adrian-docs.com). The apex `S3` bucket redirects every request to the subdomain itself - which will then proxy the requests to the `S3` bucket. One aspect I don't adhere to from the documentation is leaving a bucket entirely open, both only allow access from the CloudFlare network itself. The following is the `s3_subdomain.tf` file:
 
@@ -147,7 +150,7 @@ resource "aws_s3_bucket_website_configuration" "apex" {
 
 The `host_name` variable under `redirect_all_requests_to` is equal to the name of the previously created bucket - which in this case is (mandatory to be) www.adrian-docs.com - thanks to both of these buckets both the apex and the subdomain now work!
 
-## CloudFlare
+### CloudFlare
 
 ```HCL
 data "cloudflare_ip_ranges" "cloudflare" {}
@@ -183,7 +186,7 @@ There are three possibilities here:
 3. Fix the `CloudFlare` `Terraform` provider.
 Out of these (3), the last would be the best - yet that would go besides the scope of this project. (2) goes against the choice of `CloudFlare` - which is being cheap. Therefore I'm left with for now (1) by process of elimination - unfortunately.
 
-# The GitHub Pipeline!
+## The GitHub Pipeline!
 
 This is kept simple:
 
@@ -232,17 +235,17 @@ jobs:
 
 Golang is installed. Hugo is installed. AWS credentials are configured. The website is built and then pushed onto the `S3` bucket - that's it. The secrets are pulled from the GitHub repository. The make commands are ran from a `Makefile`.
 
-# Caveats, possible improvements and so on...
+## Caveats, possible improvements and so on...
 
 There are a few things nagging at me regarding this project as is:
 1. `CloudFlare`'s "flexible SSL/TLS'.
 2. The way `Terraform` is ran (manually, locally).
 
-## CloudFlare's Flexible SSL/TLS
+### CloudFlare's Flexible SSL/TLS
 
 `S3` does not permit a secure connection. The connection is secure between the visitors and `CloudFlare` - while the communication between `CloudFlare` and the `S3` bucket is not secure. It is restricted by the `AWS` policy to only allow `CloudFlare`, yet it still sits a bit odd with me. I'd prefer all traffic to be encrypted and secure. 
 
-## Terraform Deployment
+### Terraform Deployment
 
 Currently this is ran manually - which I prefer over running it from a `GitHub` action. One possible way of changing this is via self-hosting an [Atlantis](https://github.com/runatlantis/atlantis) instance. All secrets can be stored on said instance as environment variables and from the GitHub side we simply send a webhook to inform it which infrastructure to deploy. 
 This is a bit of an overkill for such a small project, but worth setting up in the future for the fun of it.

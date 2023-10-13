@@ -1,0 +1,54 @@
+baseURL = "https://www.adrian-docs.com/"
+theme = "LoveIt"
+languageCode = 'en-us'
+title = "Adrian Docs"
+description = "Adrian personal website"
+
+[params]
+  description = "Adrian personal website"
+  title = "Adrian Docs"
+  version = "0.2.X"
+  defaultTheme = "dark"
+  dateFormat = "2006-01-02"
+  
+
+[params.home]
+  rss = 10
+  [params.home.profile]
+    title = ""
+    subtitle = "Hi, I'm Adrian - an engineer from Eastern Europe who wanted a place other then GitHub to document his projects and to make this website as a project."
+    typeit = false
+    social = true
+  [params.home.posts]
+    enable = true
+    paginate = 6
+    defaultHiddenFromHomePage = false
+    
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    pre = ""
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    title = ""
+    weight = 1
+
+[params.social]
+    GitHub = "aliasboink"
+
+
+[author]
+  name = "Adrian"
+  email = "adrianlaurb@gmail.com"
+
+[params.footer]
+    enable = true
+    hugo = false
+    copyright = true
+    author = true
+    since = 2023
+
+[markup]
+  [markup.highlight]
+    noClasses = false
