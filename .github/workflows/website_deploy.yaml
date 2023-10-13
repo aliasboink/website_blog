@@ -31,10 +31,10 @@ jobs:
         with:
           aws-region: eu-central-1           
       
-      - name: hugo build
+      - name: Hugo build
         run : |
           make build          
       
-      - name: push build artifact to S3
+      - name: Push to S3
         run: |
           make deploy    

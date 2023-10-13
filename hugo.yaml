@@ -7,10 +7,18 @@ params:
   hideFooter: true
   defaultTheme: 'dark'
   author: Adrian
+  ShowShareButtons: true
+  ShowReadingTime: true
+  displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowToc: true
 
   homeInfoParams:
     title: "Adrian's Documentation"
-    Content: Hi, I'm Adrian - an engineer from Eastern Europe who wanted a place other then GitHub to document his projects and to make this website as a project. uwu
+    Content: Hi, I'm Adrian - an engineer from Eastern Europe who wanted a place other then GitHub to document his projects and to make this website as a project.
 
   socialIcons:
     - name: github
