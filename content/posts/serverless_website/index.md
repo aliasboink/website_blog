@@ -16,7 +16,7 @@ For deployment of infrastructure `Terraform` will be used. This will be used for
 
 ![Website Structure](website_structure.png "Infrastructure - sort of")
 
-*Conceptually*, on the left side the users make a request to `CloudFlare` and that is forwarded to the `S3` bucket. This is true for the subdomain bucket. *Practically*, the apex bucket redirects all requests to www.adrian-docs.com and then the same workflow happens - the apex bucket is not showcased in the diagram. The apex bucket is not shown in the diagram. 
+*Conceptually*, on the left side the users make a request to `CloudFlare` and that is forwarded to the `S3` bucket. This is true for the subdomain bucket. *Practically*, the apex bucket redirects all requests to www.adrian-docs.com and then the same workflow happens. The apex bucket is not shown in the diagram. 
 On the right side is the GitHub workflow - which simply utilizes `GitHub` actions to deploy the website on the bucket upon a push.
 
 ## Installing Hugo
