@@ -31,7 +31,7 @@ The installation itself was quite easy using the [official documentation](https:
 
 ### Design
 
-yeah so I knew you can use this with google and you can somehow have a root app. some quick Googling lead to the fact that this is a very common well known pattern documented by ArgoCD as well right [here](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)!
+Some quick Googling lead to the fact that this is a very common well known pattern documented by ArgoCD as well right [here](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)!
 
 The reason why this pattern is powerful is because it allows you to have applications picked up from a git repository that you can easily modify. You can add applications, you can remove applications, you can add a few extra resources that may be required for this specific cluster - you can do whatever all via traceable git commits.
 
