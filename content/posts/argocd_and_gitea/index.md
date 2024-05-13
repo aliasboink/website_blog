@@ -62,13 +62,13 @@ Set it up, changed ports around a bit, and got it successfully running in the cl
 
 Now, since I don't wish for my Raspberry Pi 4 to be set aflame I have to make Gitea be invite only. For the sake of security, I also wish for the credentials of the admin user to not be part of the `values.yaml` file. Gitea allows giving the credentials via a Kubernetes Secret, but unfortunately _for some reason_ it doesn't allow you to set the admin email in the Kubernetes Secret as well. That has to be done through the `values.yaml` file.
 
-### Connect the Raspberry Pi 4 to the internet
+## Connect the Raspberry Pi 4 to the internet
 
 The first thought that came to mind was port forwarding. This would come with the "downside" of having to harden my local network - but all in all it sounds like a fun challenge. Unfortunately, my internet provider seems to be using CGNAT and to be able to expose my `Raspberry Pi 4` a number of calls with the internet provider and possibly a chance of routers would be necessary - thus another option was chosed.
 
 [CloudFlare Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) fit the bill perfectly well. At the risk of sounding like an advertisment - the tunnel was extremely easy to set up and requires no further hardening as everything goes through a `CloudFlare Proxy`. Should be good if you trust CloudFlare with your traffic data. :)
 
 
-## Where is this accessible?
+## Where is Gitea accessible?
 
-You can access this [here](https://gitea.adrian-docs.com/)!
+You can access Gitea [here](https://gitea.adrian-docs.com/)!
