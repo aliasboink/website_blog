@@ -29,9 +29,11 @@ The installation itself was quite easy using the [official documentation](https:
 
 ## ArgoCD on K3s
 
+ArgoCD and Kubernetes make a surprisingly good pair - one strange benefit I enjoy a fair bit is that I can look at the configuration or logs of applications both with `ArgoCD` and with Kubernetes tools, specifically `k9s` in my case.
+
 ### Design
 
-Some quick Googling lead to the fact that this is a very common well known pattern documented by ArgoCD as well right [here](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)!
+For the purpose of using GitHub as much as possible - I needed to create what is known as a "root app". Some quick Googling lead to the fact that this is a very common well known pattern documented by ArgoCD right [here](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)!
 
 The reason why this pattern is powerful is because it allows you to have applications picked up from a git repository that you can easily modify. You can add applications, you can remove applications, you can add a few extra resources that may be required for this specific cluster - you can do whatever all via traceable git commits.
 
