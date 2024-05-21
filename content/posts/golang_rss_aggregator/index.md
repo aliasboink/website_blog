@@ -6,7 +6,7 @@ draft = false
 
 ## Introduction
 
-This whole endeavour started out of my desire to learn Golang and the whole process one would have to go through to deploy an application. In my day to day job I mostly deal with already existing infrastructure - whether it's the LGTM Grafana Labs stack, already existing deployments or so on, I've never had the opportunity to do the entire process end to end. Might as well just do it. 
+This whole endeavour started out of my desire to learn `Golang` and the whole process one would have to go through to deploy an application. In my day to day job I mostly deal with already existing infrastructure - whether it's the LGTM Grafana Labs stack, already existing deployments or so on. I've never had the opportunity to do the entire process end to end. Might as well just do it. 
 
 This project is built upon the backbone of [what was built in the previous blog post](https://www.adrian-docs.com/posts/argocd_and_gitea/).
 
@@ -24,16 +24,17 @@ The list of technologies/programming languages/tools used is as follows:
 
 ### Why Golang?
 
-Golang is pretty widely used in the context of solving infrastructure problems. I find a number of things about the language quite pleasant - even if some lead to quite a bit of tedium (very explicit error handling by repeating 3 LoC). Their interactive tutorial is quite good, but I foudn [boot.dev](https://www.boot.dev/) to be an exquisite source for learning it - so that's what I did and what enspired the RSS Aggregator as it is a project on their website!
+`Golang` is pretty widely used in the context of solving infrastructure problems. I find a number of things about the language quite pleasant - even if some lead to quite a bit of tedium (very explicit error handling by repeating 3 LoC). Their interactive tutorial is quite good, but I found [boot.dev](https://www.boot.dev/) to be an exquisite source for learning it - so that's what I used initially and what inspired the RSS Aggregator as it is a project on their website!
 
-The guided project doesn't tell you **how** to do things, just **what** to do - which I found to be a pretty good approach to get over the initial hump of "not knowing what to build" with a new tool one's learning.
+The guided project doesn't tell you **how** to do things, just **what** to do - which is a pretty good approach to get over the initial hump of "not knowing what to build" with a new tool one's learning.
 
 ### Why Svelte?
 
-Through this project I have concluded that the frontend environment is a jungle. The amount of JavaScript frameworks is insane - as indicated by the existence of: [Days Since Last JavaScript Framework](https://dayssincelastjavascriptframework.com/). 
-First off I tried toying around with `React` some - felt too heavy handed for such a small project. Angular - same issue. Ultimately I looked over a plethora of possibilities and settling for Svelte as: 
+Through this project I have concluded that the frontend environment is a jungle. The amount of `JavaScript frameworks is insane - as indicated by the existence of: [Days Since Last JavaScript Framework](https://dayssincelastjavascriptframework.com/). 
+
+First off I tried toying around with `React` some - felt too heavy handed for such a small project. `Angular` - same issue. Ultimately I looked over a plethora of possibilities and settling for `Svelte` as: 
 1. It has quite a nice interactive tutorial
-2. Svelte 5 had been released and the frontend users were happily surprised - might as well trust them
+2. `Svelte 5` had been released and the frontend developers were happily surprised - might as well trust them
 3. It has a lot of positive feedback on getting something running fast - which I what I want
 
 ### Why Kubernetes and Helm Chart and ArgoCD and...
@@ -50,7 +51,7 @@ This is split into two:
 
 Ideally everything is obfuscated as much as possible and the enduser has the least amount of privileges possible - this would also mean obfuscating the backend entirely. 
 
-In my case, infinite scrolling is a must. Therefore the design I chose for this as it was easiest to implement is to have both the frontend and backend publicly exposed. To this end a `Cloudflare Tunnel` was used. As I already had one pointing to this domain, all I had to do was [configure the ingress](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/configure-tunnels/local-management/configuration-file/) accordingly and it worked like a charm. Finding the proper documentation for this was a bit of a headache, but after knowing it's possible and having an example it required very little tinkering. 
+In my case, infinite scrolling is a must. Therefore the design I chose for this, as it was easiest to implement, is to have both the frontend and backend publicly exposed. To this end a `CloudFlare Tunnel` was used. As I already had one pointing to this domain, all I had to do was [configure the ingress](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/configure-tunnels/local-management/configuration-file/) accordingly and it worked like a charm. Finding the proper documentation for this was a bit of a headache, but after knowing it's possible and having an example it required very little tinkering. 
 
 The result is the following:
 
@@ -90,17 +91,17 @@ Possible improvements could be (to name a few):
 
 ### Secret Handling
 
-I haven't gone over this, but the `Kubernetes` Secrets that are important are created manually and then the applications receive them as environment variables. The manual creation is the issue - typically one would use an a secret manager and simply pull the secrets from said secret manager. Something like Hashicorp Vault if you're really going the extra mile - which I am not. In my case I have the data from the secrets saved locally together with the YAML manifests. These are deployed locally via a script.
+I haven't gone over this, but the `Kubernetes Secrets` that are important are created manually and then the applications receive them as environment variables. The manual creation is the issue - typically one would use an a secret manager and simply pull the secrets from said secret manager. Something like Hashicorp Vault if you're really going the extra mile - which I am not. In my case I have the data from the secrets saved locally together with the YAML manifests. These are deployed locally via a script.
 
 ### Frontend 
 
-I'm awful at it and therefore I dislike it. I put it together as quick as I can while learning as much as I can in the shortest possible time to have a decent result. Mind you, the CSS is all handwritten with the exception of [Flexbox Grid](http://flexboxgrid.com/#top) which proved to be very handy and has a very small footprint.
+I'm awful at it as it currently stands. I put it together as quick as I can while learning as much as I can in the shortest possible time to have a decent result. Mind you, the CSS is all handwritten with the exception of [Flexbox Grid](http://flexboxgrid.com/#top) which proved to be very handy and has a very small footprint.
 
-Besides touching up what already exists, features can be added that allow for sorting, pulling a different amount of data and so on. This may also require changes on the backend depending on how far one goes with the features.
+Besides touching up what already exists, features can be added that allow sorting, pulling a different amount of data, and so on. This may also require changes on the backend depending on how far one goes with the features.
 
 ### CI/CD
 
-There are plenty manual steps here. Releases are not automated. `ArgoCD` doesn't pick up an image if the tag is the same (last time I checked the feature was in beta). So and so forth, but I don't really care to change these aspects as the project is very small in size and I prefer to have the control over these steps as they're not something one may forget - and if I do I can just check this post!
+There are plenty manual steps here. Releases are not automated. `ArgoCD` doesn't pick up an image if the tag is the same (last time I checked the feature was in beta). So and so forth, but I don't consider it necessary to change these aspects as the project is very small in size and I prefer to have the control over these steps as they're not something one may forget - and if I do I can just check this post!
 
 ## Where is the RSS Aggregator accessible?
 
