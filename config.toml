@@ -16,7 +16,7 @@ description = "Adrian personal website"
   rss = 10
   [params.home.profile]
     title = ""
-    subtitle = "Hi, I'm Adrian - an engineer from Eastern Europe who wanted a place other than GitHub to document his projects."
+    subtitle = "Hi, I'm Adrian. I ramble about things I've done or learnt about."
     typeit = false
     social = true
   [params.home.posts]
