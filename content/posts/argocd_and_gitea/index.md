@@ -19,7 +19,7 @@ Here there are several options. The ones I gave a brief look at being the follow
 - k3s
 - minikube
 - kind 
-- k0
+- k0s
 - kubeadm
 - and more...
 

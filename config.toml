@@ -16,7 +16,7 @@ description = "Adrian personal website"
   rss = 10
   [params.home.profile]
     title = ""
-    subtitle = "Hi, I'm Adrian. I ramble about things I've done or learnt about."
+    subtitle = "Hi, I'm Adrian. I ramble about things I've done or have learnt about."
     typeit = false
     social = true
   [params.home.posts]
