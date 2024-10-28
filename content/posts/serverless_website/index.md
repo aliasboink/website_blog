@@ -10,6 +10,15 @@ Initially I wanted an AWS project - whatever that may be, as I am (at the time o
 
 Initially I looked at making it entirely within AWS (using `Route 52` & `CloudFront`), yet `CloudFlare` came to mind and the plethora of features they offer alongside it being free, well, outside of the domain itself. The only costs inquired are for the domain and the `S3` bucket. The data will be proxied via `CloudFlare` onto the `S3` bucket which hosts the website. Everything is handled by `CloudFlare` as long as the DNS records are properly set.
 
+### Quick links
+
+Deployed in this article: https://www.adrian-docs.com/
+Repositories used: 
+- https://github.com/aliasboink/website_blog
+- https://github.com/aliasboink/website_blog_infra
+
+## Getting Started
+
 Now that that's been established, the question is what to write the website with? To that end I was recommended `Hugo` by a friend, a simple lightweight static website generator written in `Golang` and used through `markdown`. `Hugo` will generate the website in `public/` and this will be pushed onto the S3 bucket.
 
 For deployment of infrastructure `Terraform` will be used. This will be used for the creation of all `AWS` resources and the `CloudFlare` records.

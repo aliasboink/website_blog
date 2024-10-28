@@ -6,11 +6,18 @@ draft = false
 
 ## Introduction
 
-I was looking for a reason to use [Kubernetes](https://kubernetes.io/). I got a Raspberry Pi 4 to host a "cluster" (1 node) on - that's plenty for an educational projects with the possibility of expanding it in the futrure. It's go time.
+I wanted a local development environment for [Kubernetes](https://kubernetes.io/). I got a Raspberry Pi 4 to host a "cluster" (1 node) on - which has served me excellently well for testing, quick local development and for hosting parts of this website.
 
-Since I want everything in GitHub the best tool for deployment on `Kubernetes` seems a combination of `Helm` and `ArgoCD` will do the job. That's also thanks to the fact that I have experience with them, which may or may not make me biased. :)
+Since I want everything in `GitHub` the best tool for deployment on `Kubernetes` seems a combination of `Helm` and `ArgoCD` will do the job. That's also thanks to the fact that I have experience with them, which may or may not make me biased. :)
 
 To that end, the following technologies will be used: `Kubernetes` will be used for the orchestration of the containers, `ArgoCD` for deployment, everything will be nicely packed in `Helm` charts, and the code will all be on `GitHub`. Anything more will be application specific.
+
+### Quick links
+
+Deployed in this article: https://gitea.adrian-docs.com/
+Repositories used: 
+- https://github.com/aliasboink/raspberrypi_argocd_charts 
+- https://github.com/aliasboink/raspberrypi_argocd_module
 
 ## How to use Kubernetes with Raspberry Pi?
 
@@ -23,7 +30,7 @@ Here there are several options. The ones I gave a brief look at being the follow
 - kubeadm
 - and more...
 
-Two of these are best fit for local development (`minikube` and `kind`). The rest are a good depending on what you want. I didn't study all of them in-depth, but briefly gave them a look and flipped a coin that landed on `k3s`. The official documentation is nice and comprehensive with simple illustrations. Great documentation is slowly becoming of the major reasons why I like a new technology.. It's advertisment for IoT deployments - it fits the bill just fine.
+Two of these are best fit for local development (`minikube` and `kind`). The rest are a good depending on what you want. I didn't verify all of them in-depth, but briefly investigated it and landed on `k3s`. The official documentation is nice and comprehensive with simple illustrations. Great documentation is slowly becoming of the major reasons why I like a new technology.. It's advertisment for IoT deployments - it fits the bill just fine.
 
 The installation itself was quite easy using the [official documentation](https://docs.k3s.io/installation). There were a couple of hiccups that were easily fixed.
 
@@ -33,7 +40,7 @@ The installation itself was quite easy using the [official documentation](https:
 
 ### Design
 
-For the purpose of using `GitHub` as much as possible - I needed to create what is known as a "root app". Some quick Googling lead to the fact that this is a very common well known pattern documented by `ArgoCD` right [here](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)!
+For the purpose of using `GitHub` as much as possible - I needed to create the "root app". Some quick Googling lead to the fact that this is a very common well known pattern documented by `ArgoCD` right [here](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)!
 
 The reason why this pattern is powerful is because it allows you to have applications picked up from a git repository that you can easily modify. You can add applications, you can remove applications, you can add a few extra resources that may be required for this specific cluster - you can do whatever all via traceable git commits.
 
@@ -48,7 +55,7 @@ The process I followed here was the following:
 2. Manually deploy on the `K3s` cluster
 3. Manually deploy on the `K3s` cluster with the `GitHub` repository code
 
-I prefer to have (1) due to two reasons: I am comfortable running kind clusters locally and an `amd64` architecture may prove easier to work with initally. For (2) I followed the exact same steps in (1) successfully. For (3) the "code" writing starts [here](https://github.com/aliasboink/raspberrypi_argocd_module). The only caveat is that I have a small script to load the `ssh_key`as an environment variable - this has to be ran before the deployment. Normally this would be better pulled from an external vault, but given the scale of the project I'd rather a small extra step.
+I prefer to have (1) due to two reasons: I am comfortable running `kind` clusters locally and an `amd64` architecture may prove easier to work with initally. For (2) I followed the exact same steps in (1) successfully. For (3) the "code" writing starts [here](https://github.com/aliasboink/raspberrypi_argocd_module). The only caveat is that I have a small script to load the `ssh_key`as an environment variable - this has to be ran before the deployment. Normally this would be better pulled from an external vault, but given the scale of the project I'd rather a small extra step.
 
 ## Set up Gitea 
 

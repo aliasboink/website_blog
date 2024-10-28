@@ -10,6 +10,14 @@ This whole endeavour started out of my desire to learn `Golang` and the whole pr
 
 This project is built upon the backbone of [what was built in the previous blog post](https://www.adrian-docs.com/posts/argocd_and_gitea/).
 
+### Quick links
+
+Deployed in this article: https://agg.adrian-docs.com/
+Repositories used: 
+- https://github.com/aliasboink/go_rss_aggregator_stripped
+- https://github.com/aliasboink/go_rss_aggregator_stripped_helm_chart
+- https://github.com/aliasboink/go_rss_aggregator_stripped_frontend
+
 ## Technologies Chosen
 
 The list of technologies/programming languages/tools used is as follows:
