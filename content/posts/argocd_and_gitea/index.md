@@ -14,7 +14,7 @@ To that end, the following technologies will be used: `Kubernetes` will be used 
 
 ### Quick links
 
-Deployed in this article: https://gitea.adrian-docs.com/
+Deployed in this article: https://gitea.adrian-docs.com/ (taken down for performance, RPi will also be used as a WiFi bridge)
 Repositories used: 
 - https://github.com/aliasboink/raspberrypi_argocd_charts 
 - https://github.com/aliasboink/raspberrypi_argocd_module
